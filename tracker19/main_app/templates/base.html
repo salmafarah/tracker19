@@ -1,3 +1,4 @@
+{%load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,17 +7,36 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Tracker19</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
   <header class="navbar-fixed">
     <nav>
-      <div class="nav-wrapper">
+      <div class="nav-wrapper brown lighten-5 ">
         <ul>
-          <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Tracker19</a></li>
+          <li><a href="/" class="left brand-logo black-text ">&nbsp;&nbsp;Tracker19</a></li>
         </ul>
-        <ul class="right">
+      {% if user.is_authenticated %}
+        <ul class="right ">
           <li><a href="/about">About</a></li>
         </ul>
+        <ul class="right">
+          <li><a href="#">My Entries </a></li>
+        </ul>
+        <ul class="right">
+          <li><a href="#">Create an Entry </a></li>
+        </ul>
+        <ul class="right">
+          <li><a href="{% url 'logout' %}">Log Out</a></li>
+        </ul>
+        {% else%}
+        <ul class="right">
+          <li><a href="{% url 'signup' %}"></a>>Sign Up</a></li>
+        </ul>
+        <ul class="right">
+          <li><a href="{% url 'login' %}">Log In</a></li>
+        </ul>
+        {% endif %}
       </div>
     </nav>
   </header>

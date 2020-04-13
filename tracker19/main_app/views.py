@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm 
+from django.contrib.auth.decorators import login_required 
+from django.contrib.auth.mixins import LoginRequiredMixin 
 
 
 #Classes go here
@@ -8,8 +11,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def home(request): #static for now -> maybe show all other user as stretch goal
-  pass
-    # return render(request, 'home.html')
+    return render(request, 'base.html')
 
 
 
@@ -28,8 +30,18 @@ def about(request): #Static, read
 
 
 def signup (request):
-  pass
-
+  error_message = ''
+  if request.method == 'POST': 
+    form = UserCreationForm(request.POST)
+    if form.is_valid(): 
+      user = form.save()
+      login(request,user)
+      return redirect('index')
+    else: 
+      error_message = 'Invalid sign up - try again SiS'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)
 
 
 
