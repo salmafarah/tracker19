@@ -1,8 +1,10 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.decorators import login_required 
 from django.contrib.auth.mixins import LoginRequiredMixin 
+from django.shortcuts import render
+
+
 
 
 #Classes go here
@@ -29,7 +31,7 @@ def about(request): #Static, read
 
 
 
-def signup (request):
+def signup(request):
   error_message = ''
   if request.method == 'POST': 
     form = UserCreationForm(request.POST)
@@ -39,9 +41,9 @@ def signup (request):
       return redirect('index')
     else: 
       error_message = 'Invalid sign up - try again SiS'
-    form = UserCreationForm()
-    context = {'form': form, 'error_message': error_message}
-    return render(request, 'registration/signup.html', context)
+  form = UserCreationForm()
+  context = {'form': form, 'error_message': error_message}
+  return render(request, 'registration/signup.html', context)
 
 
 
