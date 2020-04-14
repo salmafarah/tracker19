@@ -1,29 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>TRACKER-19</title>
 
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-</head>
-<body>
-  <nav>
-    <div class="nav-wrapper brown lighten-5 ">
-      <ul>
-          <li><a href="/" class="left noHover"> <img src="https://imgur.com/7pxrnQr.jpg" width='144px' alt="logo"> </a></li>
-      </ul>
-      <ul class="right">
-          <li><a href="home/home" class="black-text" >Home</a></li>
-        <li><a href="about/about" class="black-text" >About</a></li>
-        <li><a href="{% url 'log_in' %}" class="black-text" >Log in</a></li>
-        <li><a href="{% url 'sign_up' %}" class="black-text" >Register</a></li>
-      </ul>
-    </div>
-  </nav>
+{% extends 'base.html' %}
+{% block content %}
+{%load static %}
+
+  
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>
@@ -33,7 +13,7 @@
      
       <div class="row center">
           <style> body{
-              background-image: url("emoji.jpg");
+              background-image: url("{% static 'images/emoji.jpg' %}");
               background-size: cover;
             }
           </style>
@@ -41,13 +21,5 @@
         <a href="https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection/being-prepared.html" id="download-button" class="btn-large waves-effect">Check your Symptoms</a>
         <a href="https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection.html" id="download-button" class="btn-large waves-effect">Local Statistics</a>
       </div>
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
- 
-
-  </body>
-
-  
-</html>
+      <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+{% endblock %}
