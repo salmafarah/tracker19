@@ -4,7 +4,7 @@
 
 
        
-  <h1 class="header center teal-text text-lighten-2">WELCOME</h1>
+        <h1 class="header center teal-text text-lighten-2">WELCOME</h1>
 
   
 
@@ -54,8 +54,7 @@
         </div>
       </div>
     </div>
- 
-    <div class="parallax cover"><img src="{% static 'images/background2.jpg' %}" alt="Unsplashed background img 2"></div>
+    <div class="parallax"><img src="{% static 'images/background2.jpg' %}" alt="Unsplashed background img 2"></div>
   </div>
 
   <div class="container">
@@ -79,18 +78,21 @@
   </div>
 
 
-  <div class="parallax-container">
-   
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
       <div class="container">
         <div class="row center">
-          <h5 class="header col s12 light" style="center">HELPING YOU GET YOUR ESSENTIALS SAFELY</h5>
+          <h5 class="header col s12 light">HELPING YOU GET YOUR ESSENTIALS SAFELY</h5>
         </div>
       </div>
-    <div class="parallax bottom center"><img src="{% static 'images/background3.jpg' %} " alt="Unsplashed background img 3" style="center center"></div>
+    </div>
+    <div class="parallax"><img src="{% static 'images/background3.jpg' %}" alt="Unsplashed background img 3"></div>
   </div>
 
 
-
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="{% static 'js/init.js' %}"></script>
 
 
 {% endblock %}
