@@ -21,9 +21,11 @@ class EntryDelete(DeleteView):
 
 
 # Create your views here.
-def home(request): #static for now -> maybe show all other user as stretch goal
+def home(request): 
+  return render(request, 'home.html')
+  #static for now -> maybe show all other user as stretch goal
   pass
-    # return render(request, 'home.html')
+    
 
 
 
