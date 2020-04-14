@@ -7,14 +7,10 @@
   <a href="{% url 'detail' e.id %}" >
     <div class="card">
         <div class="card-content">
-            <p>Year: {{ entry.year }}</p>
-            <p>Month: {{ entry.month }}</p>
-            <p>Day: {{ entry.day }}</p>
-            <p>Hour: {{ entry.hour }}</p>
-            <p>Min: {{ entry.min }}</p>
-            <p>Location: {{ entry.location }}</p>
-            <p>Partner: {{ entry.partner }}</p>
-            <p>Comments: {{ entry.comments }}</p>  
+            <p>Year: {{ e.year }}</p>
+            <p>Month: {{ e.month }}</p>
+            <p>Day: {{ e.day }}</p>
+            <p>Location: {{ e.location }}</p>
         </div>
     </div>
   </a>
