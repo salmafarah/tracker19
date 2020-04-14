@@ -1,8 +1,8 @@
-(function($){
-  $(function(){
 
-    // $('.sidenav').sidenav();
-    // $('.parallax').parallax();
+  $(document).ready(function(){$('.parallax').parallax();}); 
 
-  }); // end of document ready
-})(jQuery); // end of jQuery name space
+     console.log();
+
+// end of document ready
+
+// (jQuery); // end of jQuery name space
