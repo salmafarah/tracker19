@@ -16,8 +16,8 @@
         <p>Comments: {{ entry.comments }}</p>
       </div>
       <div class="card-action">
-        <a href="{% url 'cats_update' cat.id %}">Edit</a>
-        <a href="{% url 'cats_delete' cat.id %}">Delete</a>
+        <a href="{% url 'entry_update' entry.id %}">Edit</a>
+        <a href="{% url 'entry_delete' entry.id %}">Delete</a>
       </div>
     </div>
   </div>

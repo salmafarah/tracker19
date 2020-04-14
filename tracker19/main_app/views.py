@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.http import HttpResponse
 from .models import Entry
 
 #Classes go here
@@ -11,7 +11,7 @@ class FormCreate(CreateView):
 
 class EntryUpdate(UpdateView):
   model = Entry
-  fields = ['year', 'month', 'day', 'hour', 'min', 'location', 'address', 'partner', 'comments']
+  fields = [ 'year', 'month', 'day', 'hour', 'min', 'location', 'address', 'partner', 'comments' ]
 
 class EntryDelete(DeleteView):
   model = Entry
@@ -49,9 +49,7 @@ def about(request): #Static, read
 
 
 
-def entry_index(request):
-  entry = Entry.objects.all()
-  return render(request, 'entry/index.html', { 'entry': entry })
+
 
 
 
@@ -75,6 +73,12 @@ def create_form(request): #Create
 
 
 
+
+
+
+
+
+
 def entry_detail(request, entry_id):
   entry = Entry.objects.get(id=entry_id)
   # instantiate FeedingForm to be rendered in the template
@@ -83,7 +87,9 @@ def entry_detail(request, entry_id):
     'entry': entry
   })
 
-
+def entry_index(request):
+  entry = Entry.objects.all()
+  return render(request, 'entry/index.html', { 'entry': entry })
 
 
 
