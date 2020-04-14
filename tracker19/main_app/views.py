@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponse
-from django.views.generic.edit import CreateView
 from .models import Entry
 
 #Classes go here
@@ -8,6 +8,16 @@ from .models import Entry
 class FormCreate(CreateView):
   model = Entry
   fields = [ 'year', 'month', 'day', 'hour', 'min', 'location', 'address', 'partner', 'comments' ]
+
+class EntryUpdate(UpdateView):
+  model = Entry
+  fields = [ 'year', 'month', 'day', 'hour', 'min', 'location', 'address', 'partner', 'comments' ]
+
+class EntryDelete(DeleteView):
+  model = Entry
+  success_url = '/entry/'
+
+
 
 
 # Create your views here.
@@ -31,8 +41,6 @@ def about(request): #Static, read
 
 
 
-def signup (request):
-  pass
 
 
 
@@ -42,17 +50,6 @@ def signup (request):
 
 
 
-
-
-
-
-
-
-
-
-
-def profile(request): #shows all entries of the user, READ all 
-  pass
 
 
 
@@ -71,8 +68,6 @@ def create_form(request): #Create
 
 
 
-def one_entry(request): #shows one entry when clicked on #READ DELETE AND UPDATE goes here
-  pass
 
 
 
@@ -81,6 +76,20 @@ def one_entry(request): #shows one entry when clicked on #READ DELETE AND UPDATE
 
 
 
+
+
+
+def entry_detail(request, entry_id):
+  entry = Entry.objects.get(id=entry_id)
+  # instantiate FeedingForm to be rendered in the template
+  return render(request, 'entry/detail.html', {
+    # pass the cat and feeding_form as context
+    'entry': entry
+  })
+
+def entry_index(request):
+  entry = Entry.objects.all()
+  return render(request, 'entry/index.html', { 'entry': entry })
 
 
 
@@ -88,3 +97,6 @@ def one_entry(request): #shows one entry when clicked on #READ DELETE AND UPDATE
 # User page -> Nav Bar: Home, About, Sign-out, Profile
 # Templates
 # Home
+
+
+
