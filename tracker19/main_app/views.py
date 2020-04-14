@@ -10,7 +10,7 @@ from .models import Entry
 
 #Classes go here
 
-class FormCreate(CreateView):
+class FormCreate(LoginRequiredMixin,CreateView):
   model = Entry
   fields = [ 'year', 'month', 'day', 'hour', 'min', 'location', 'address', 'partner', 'comments' ]
   success_url = '/entry/'
@@ -19,11 +19,11 @@ class FormCreate(CreateView):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
-class EntryUpdate(UpdateView):
+class EntryUpdate(LoginRequiredMixin,UpdateView):
   model = Entry
   fields = [ 'year', 'month', 'day', 'hour', 'min', 'location', 'address', 'partner', 'comments' ]
 
-class EntryDelete(DeleteView):
+class EntryDelete(LoginRequiredMixin,DeleteView):
   model = Entry
   success_url = '/entry/'
   
@@ -88,7 +88,7 @@ def signup(request):
 
 
 
-
+@login_required 
 def entry_detail(request, entry_id):
   entry = Entry.objects.get(id=entry_id)
   return render(request, 'entry/detail.html', {
@@ -102,7 +102,7 @@ def entry_detail(request, entry_id):
 
 
 
-
+@login_required 
 def entry_index(request):
   entry = Entry.objects.all()
   return render(request, 'entry/index.html', { 'entry': entry })
