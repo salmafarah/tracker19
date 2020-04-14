@@ -1,9 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from django.views.generic.edit import CreateView
+from .models import Entry
 
 #Classes go here
 
+class FormCreate(CreateView):
+  model = Entry
+  fields = [ 'year', 'month', 'day', 'hour', 'min', 'location', 'address', 'partner', 'comments' ]
 
 
 # Create your views here.
