@@ -67,7 +67,7 @@ def signup(request):
     if form.is_valid(): 
       user = form.save()
       login(request,user)
-      return redirect('index')
+      return redirect('entry_index')
     else: 
       error_message = 'Invalid sign up - try again SiS'
   form = UserCreationForm()
@@ -105,7 +105,7 @@ def entry_detail(request, entry_id):
 
 @login_required 
 def entry_index(request):
-  entry = Entry.objects.all()
+  entry = Entry.objects.filter(user=request.user)
   return render(request, 'entry/index.html', { 'entry': entry })
 
 
