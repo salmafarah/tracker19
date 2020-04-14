@@ -109,6 +109,8 @@ def entry_index(request):
 
 
 
+
+
 # Home page -> Nav Bar: Home, About, Sign-in, Sign-up
 # User page -> Nav Bar: Home, About, Sign-out, Profile
 # Templates
