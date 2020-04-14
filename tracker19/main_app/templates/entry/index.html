@@ -4,7 +4,7 @@
 <h1>Entries</h1>
 
 {% for e in entry %}
-  <a href="{% url 'detail' entry.id %}">
+  <a href="{% url 'detail' e.id %}" >
     <div class="card">
         <div class="card-content">
             <p>Year: {{ entry.year }}</p>
