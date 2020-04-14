@@ -1,7 +1,12 @@
+from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm 
+from django.contrib.auth.decorators import login_required 
+from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponse
 from .models import Entry
+
 
 #Classes go here
 
@@ -16,16 +21,21 @@ class EntryUpdate(UpdateView):
 class EntryDelete(DeleteView):
   model = Entry
   success_url = '/entry/'
+  
+  
+  
+  
+  
 
 
 
 
 # Create your views here.
-def home(request): 
-  return render(request, 'home.html')
-  #static for now -> maybe show all other user as stretch goal
-  pass
-    
+def home(request): #static for now -> maybe show all other user as stretch goal
+    return render(request, 'base.html')
+  #return render(request, 'home.html')
+  
+  
 
 
 
@@ -44,13 +54,19 @@ def about(request): #Static, read
 
 
 
-
-
-
-
-
-
-
+def signup(request):
+  error_message = ''
+  if request.method == 'POST': 
+    form = UserCreationForm(request.POST)
+    if form.is_valid(): 
+      user = form.save()
+      login(request,user)
+      return redirect('index')
+    else: 
+      error_message = 'Invalid sign up - try again SiS'
+  form = UserCreationForm()
+  context = {'form': form, 'error_message': error_message}
+  return render(request, 'registration/signup.html', context)
 
 
 
@@ -71,23 +87,19 @@ def create_form(request): #Create
 
 
 
-
-
-
-
-
-
-
-
-
-
 def entry_detail(request, entry_id):
   entry = Entry.objects.get(id=entry_id)
-  # instantiate FeedingForm to be rendered in the template
   return render(request, 'entry/detail.html', {
-    # pass the cat and feeding_form as context
     'entry': entry
   })
+
+
+
+
+
+
+
+
 
 def entry_index(request):
   entry = Entry.objects.all()
