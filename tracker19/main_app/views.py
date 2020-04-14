@@ -13,6 +13,11 @@ from .models import Entry
 class FormCreate(CreateView):
   model = Entry
   fields = [ 'year', 'month', 'day', 'hour', 'min', 'location', 'address', 'partner', 'comments' ]
+  success_url = '/entry/'
+
+  def form_valid(self, form):
+        form.instance.user - self.request.user
+        return super().form_valid(form)
 
 class EntryUpdate(UpdateView):
   model = Entry
@@ -75,9 +80,6 @@ def signup(request):
 
 
 
-
-def create_form(request): #Create
-  pass
 
 
 
