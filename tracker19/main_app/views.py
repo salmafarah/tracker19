@@ -2,18 +2,40 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.decorators import login_required 
 from django.contrib.auth.mixins import LoginRequiredMixin 
-from django.shortcuts import render
-
-
+from django.shortcuts import render, redirect
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.http import HttpResponse
+from .models import Entry
 
 
 #Classes go here
+
+class FormCreate(CreateView):
+  model = Entry
+  fields = [ 'year', 'month', 'day', 'hour', 'min', 'location', 'address', 'partner', 'comments' ]
+
+class EntryUpdate(UpdateView):
+  model = Entry
+  fields = [ 'year', 'month', 'day', 'hour', 'min', 'location', 'address', 'partner', 'comments' ]
+
+class EntryDelete(DeleteView):
+  model = Entry
+  success_url = '/entry/'
+  
+  
+  
+  
+  
+
 
 
 
 # Create your views here.
 def home(request): #static for now -> maybe show all other user as stretch goal
     return render(request, 'base.html')
+  #return render(request, 'home.html')
+  
+  
 
 
 
@@ -23,6 +45,7 @@ def home(request): #static for now -> maybe show all other user as stretch goal
 
 def about(request): #Static, read
   return render(request, 'about.html')
+
 
 
 
@@ -53,24 +76,6 @@ def signup(request):
 
 
 
-
-
-
-
-
-
-
-
-def profile(request): #shows all entries of the user, READ all 
-  pass
-
-
-
-
-
-
-
-
 def create_form(request): #Create
   pass
 
@@ -81,8 +86,12 @@ def create_form(request): #Create
 
 
 
-def one_entry(request): #shows one entry when clicked on #READ DELETE AND UPDATE goes here
-  pass
+
+def entry_detail(request, entry_id):
+  entry = Entry.objects.get(id=entry_id)
+  return render(request, 'entry/detail.html', {
+    'entry': entry
+  })
 
 
 
@@ -91,6 +100,10 @@ def one_entry(request): #shows one entry when clicked on #READ DELETE AND UPDATE
 
 
 
+
+def entry_index(request):
+  entry = Entry.objects.all()
+  return render(request, 'entry/index.html', { 'entry': entry })
 
 
 
@@ -98,3 +111,6 @@ def one_entry(request): #shows one entry when clicked on #READ DELETE AND UPDATE
 # User page -> Nav Bar: Home, About, Sign-out, Profile
 # Templates
 # Home
+
+
+
