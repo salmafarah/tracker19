@@ -105,7 +105,7 @@ def entry_detail(request, entry_id):
 
 @login_required 
 def entry_index(request):
-  entry = Entry.objects.all()
+  entry = Entry.objects.filter(user=request.user)
   return render(request, 'entry/index.html', { 'entry': entry })
 
 
