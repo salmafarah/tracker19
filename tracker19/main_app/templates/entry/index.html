@@ -7,12 +7,8 @@
   <a href="{% url 'detail' e.id %}" >
     <div class="card">
         <div class="card-content">
-            <p>Year: {{ e.year }}</p>
-            <p>Month: {{ e.month }}</p>
-            <p>Day: {{ e.day }}</p>
-            <p>Hour: {{ e.hour }}</p>
-            <p>Min: {{ e.min }}</p>
             <p>Location: {{ e.location }}</p>
+            <p>Location: {{ e.address }}</p>
             <p>Partner: {{ e.partner }}</p>
             <p>Comments: {{ e.comments }}</p>  
         </div>
