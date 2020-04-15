@@ -7,13 +7,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.http import HttpResponse
 from .models import Entry
+from .forms import DateForm
 
 
 #Classes go here
 
 class FormCreate(LoginRequiredMixin,CreateView):
   model = Entry
-  fields = [ 'year', 'month', 'day', 'hour', 'min', 'location', 'address', 'partner', 'comments' ]
+  fields = ['date', 'location', 'address', 'partner', 'comments' ]
   success_url = '/entry/'
 
   def form_valid(self, form):
@@ -22,7 +23,8 @@ class FormCreate(LoginRequiredMixin,CreateView):
 
 class EntryUpdate(LoginRequiredMixin,UpdateView):
   model = Entry
-  fields = [ 'year', 'month', 'day', 'hour', 'min', 'location', 'address', 'partner', 'comments' ]
+
+  fields = ['location', 'address', 'partner', 'comments' ]
   success_url = '/entry/'
 
 class EntryDelete(LoginRequiredMixin,DeleteView):
@@ -80,8 +82,11 @@ def signup(request):
 
 
 
-
-
+# @login_required 
+# def date_entry(request):
+#   context = {}
+#   context['form'] = DateForm()
+#   return render(request, 'main_app/date_entry.html', context)
 
 
 
