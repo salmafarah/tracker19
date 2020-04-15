@@ -13,7 +13,7 @@ from datetime import datetime
 
 
 class Entry (models.Model) : 
-    date = models.DateTimeField(default=datetime.today)    
+    date = models.DateField()    
     location = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     partner = models.CharField(max_length=100)

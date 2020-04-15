@@ -7,12 +7,15 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.http import HttpResponse
 from .models import Entry
+from .forms import EntryForm
+
 
 #Classes go here
 
 class FormCreate(LoginRequiredMixin,CreateView):
   model = Entry
-  fields = ['date', 'location', 'address', 'partner', 'comments' ]
+  form_class = EntryForm
+  # fields = [ 'date', 'location', 'address', 'partner', 'comments' ]
   success_url = '/entry/'
 
   def form_valid(self, form):
@@ -21,7 +24,6 @@ class FormCreate(LoginRequiredMixin,CreateView):
 
 class EntryUpdate(LoginRequiredMixin,UpdateView):
   model = Entry
-
   fields = ['location', 'address', 'partner', 'comments' ]
   success_url = '/entry/'
 
