@@ -1,4 +1,3 @@
-
 {%load static %}
 
 <!DOCTYPE html>
@@ -14,22 +13,23 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script defer src="{% static 'js/init.js' %}"></script>
 
+
 </head>
 <body>
   <header class="navbar-fixed">
     <nav>
       <div class="nav-wrapper brown lighten-5 ">
         <ul>
-          <li><a href="/" class="left noHover"> <img src="https://imgur.com/7pxrnQr.jpg" width='144px' alt="logo"> </a></li>
+          <li><a href="{% url 'home' %}" class="left noHover"> <img src="https://imgur.com/7pxrnQr.jpg" width='144px' alt="logo"> </a></li>
         </ul>
 
       {% if user.is_authenticated %}
       
         <ul class="right">
-          <li><a href="#" class="black-text">My Entries </a></li>
+          <li><a href="{% url 'entry_index' %}" class="black-text">My Entries </a></li>
         </ul>
         <ul class="right">
-          <li><a href="#" class="black-text">Create an Entry </a></li>
+          <li><a href="{% url 'form_create' %}" class="black-text">Create an Entry </a></li>
         </ul>
         <ul class="right">
           <li><a href="{% url 'logout' %}" class="black-text">Log Out</a></li>
