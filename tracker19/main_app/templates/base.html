@@ -18,31 +18,30 @@
 <body>
   <header class="navbar-fixed">
     <nav>
-      <div class="nav-wrapper brown lighten-5 ">
-        <ul> 
-          <li><a href="{% url 'home' %}" class="left" id = "logoa"> <img src="https://imgur.com/7pxrnQr.jpg" width='144px' alt="logo"> </a></li>
+      <div class="nav-wrapper brown lighten-5">
+        <ul>
+          <li><a href="{% url 'home' %}" class="left" id="logoa"> <img src="https://imgur.com/7pxrnQr.jpg" width='144px' alt="logo"> </a></li>
         </ul>
 
       {% if user.is_authenticated %}
-      
-        <ul class="right">
-          <li><a href="{% url 'entry_index' %}" class="black-text">My Entries </a></li>
-        </ul>
-        <ul class="right">
-          <li><a href="{% url 'form_create' %}" class="black-text">Create an Entry </a></li>
-        </ul>
-        <ul class="right">
-          <li><a href="{% url 'logout' %}" class="black-text">Log Out</a></li>
-        </ul>
+
+      <ul class="right">
+        <li><a href="{% url 'logout' %}" class="black-text">Log Out</a></li>
+      </ul>
+      <ul class="right">
+        <li><a href="{% url 'form_create' %}" class="black-text">Create an Entry </a></li>
+      </ul>
+      <ul class="right">
+        <li><a href="{% url 'entry_index' %}" class="black-text">My Entries </a></li>
+      </ul>
+
       {% else%}
-     
         <ul class="right">
           <li><a href="{% url 'signup' %}" class="black-text">Sign Up</a></li>
         </ul>
         <ul class="right">
           <li><a href="{% url 'login' %}" class="black-text">Log In</a></li>
         </ul>
-     
       {% endif %}
       <ul class="right">
         <li><a href="{% url 'about' %}" class="black-text">About</a></li>
