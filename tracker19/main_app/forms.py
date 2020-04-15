@@ -5,10 +5,15 @@ from django.forms import ModelForm
 class DateInput(forms.DateInput):
     input_type = 'date'
 
+class TimeInput(forms.TimeInput):
+    input_type = 'time'
+
+
 class EntryForm(ModelForm):
     class Meta:
         model = Entry
-        fields = [ 'date', 'location', 'address', 'partner', 'comments' ]
+        fields = [ 'date', 'time', 'location', 'address', 'partner', 'comments' ]
         widgets = {
-            'date': DateInput()
+            'date': DateInput(),
+            'time': TimeInput()
         }
