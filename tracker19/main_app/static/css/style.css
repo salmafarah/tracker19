@@ -18,13 +18,13 @@ body {
   .icon-block {
     padding: 0 15px;
   }
-
-  #logoa {
-    padding: 0;
-    line-height: 0;
-  }
  
 
   .icon-block .material-icons {
     font-size: inherit;
   }
+
+  #logoa {
+    padding: 0;
+    line-height: 0;
+  } 
