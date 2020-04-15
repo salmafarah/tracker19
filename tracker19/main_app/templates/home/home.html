@@ -13,14 +13,35 @@
       <div class="row center">
           <style> body{
               background-image: url("{% static 'images/emoji.jpg' %}");
+              background-repeat: repeat;
               background-size: cover;
             }
           </style>
         <a href="https://www.canada.ca/en/public-health/services/publications/diseases-conditions/know-facts-about-coronavirus-disease-covid-19.html" id="download-button" class="btn-large waves-effect">Latest News</a>
         <a href="https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection/being-prepared.html" id="download-button" class="btn-large waves-effect">Check your Symptoms</a>
         <a href="https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection.html" id="download-button" class="btn-large waves-effect">Local Statistics</a>
-      </div>
+      </div>  
+      
+
       <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     </div>
+
+ 
+
+</div>
+
+
+
+  <div id="map" class = "cover center">
+    <iframe
+    position= relative;
+    width="1000";
+    height="400";
+    frameborder="0";
+    style="border:0";
+    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBnjiPnbpjqo0an_5sEauWEhWF-p3ftsl8
+      &q=Space+Needle,Seattle+WA" allowfullscreen>
+  </iframe>
+
   </div>
 {% endblock %}
