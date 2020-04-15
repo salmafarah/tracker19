@@ -14,7 +14,7 @@ from .forms import DateForm
 
 class FormCreate(LoginRequiredMixin,CreateView):
   model = Entry
-  fields = ['location', 'address', 'partner', 'comments' ]
+  fields = ['date', 'location', 'address', 'partner', 'comments' ]
   success_url = '/entry/'
 
   def form_valid(self, form):
@@ -81,11 +81,11 @@ def signup(request):
 
 
 
-@login_required 
-def date_entry(request):
-  context = {}
-  context['form'] = DateForm()
-  return render(request, 'main_app/date_entry.html', context)
+# @login_required 
+# def date_entry(request):
+#   context = {}
+#   context['form'] = DateForm()
+#   return render(request, 'main_app/date_entry.html', context)
 
 
 

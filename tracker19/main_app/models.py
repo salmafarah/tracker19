@@ -8,10 +8,12 @@
 from django.db import models
 from django.contrib.auth.models import User 
 from django.urls import reverse
-# import datetime
+from django import forms
+from datetime import datetime
 
 
 class Entry (models.Model) : 
+    date = models.DateTimeField(default=datetime.today)    
     location = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     partner = models.CharField(max_length=100)
@@ -20,6 +22,7 @@ class Entry (models.Model) :
 
     def __str__(self):
         return self.location
+
 
 #     year = models.IntegerField()
 #     month = models.IntegerField()
