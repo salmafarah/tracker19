@@ -13,8 +13,8 @@ body {
     text-align: right;
   }
 
-  a.noHover {
-  pointer-events: none;
+  a  {
+    adding: 0;
   }
 
   .icon-block {
