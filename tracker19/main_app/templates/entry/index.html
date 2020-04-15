@@ -3,15 +3,16 @@
 <main class="container">
 <h1>Entries</h1>
 
-{% for e in entry %}
-  <a href="{% url 'detail' e.id %}" >
+{% for entry in entry %}
+  <a href="{% url 'detail' entry.id %}" >
     <div class="card">
         <div class="card-content">
-            <p>Date: {{ e.date }}</p>
-            <p>Location: {{ e.location }}</p>
-            <p>Location: {{ e.address }}</p>
-            <p>Partner: {{ e.partner }}</p>
-            <p>Comments: {{ e.comments }}</p>  
+            <p>Date: {{ entry.date }}</p>
+            <p>Location: {{ entry.location }}</p>
+            <p>Location: {{ entry.address }}</p>
+            <p>Partner: {{ entry.partner }}</p>
+            <p>Comments: {{ entry.comments }}</p>  
+
         </div>
     </div>
   </a>
