@@ -23,7 +23,7 @@ class FormCreate(LoginRequiredMixin,CreateView):
 
 class EntryUpdate(LoginRequiredMixin,UpdateView):
   model = Entry
-  fields = ['location', 'address', 'comments' ]
+  fields = ['comments' ]
   success_url = '/entry/'
 
 class EntryDelete(LoginRequiredMixin,DeleteView):

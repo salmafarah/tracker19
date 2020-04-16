@@ -11,7 +11,7 @@ class TimeInput(forms.TimeInput):
 class EntryForm(ModelForm):
     class Meta:
         model = Entry
-        fields = [ 'date', 'time', 'location', 'address', 'comments' ]
+        fields = [ 'date', 'time', 'comments' ]
         widgets = {
             'date': DateInput(),
             'time': TimeInput()

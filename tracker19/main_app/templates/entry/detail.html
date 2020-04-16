@@ -7,8 +7,6 @@
       <div class="card-content">
         <p>Date: {{ entry.date }}</p>
         <p>Time: {{ entry.time }}</p>
-        <p>Location: {{ entry.location }}</p>
-        <p>Address: {{ entry.address }}</p>
         <p>Comments: {{ entry.comments }}</p>
       </div>
       <div class="card-action">
@@ -18,7 +16,7 @@
     </div>
     <div class="row">
       <div class="col s6">
-        <h3>Who Did You Go To {{ entry.location }} With</h3>
+        <h3>Who Did You Go With?</h3>
         {% if entry.partner.count %}
         {% for partner in entry.partner.all %}
         <div class="card">

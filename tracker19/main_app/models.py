@@ -28,8 +28,6 @@ class Partner(models.Model):
 class Entry (models.Model) : 
     date = models.DateField()
     time = models.TimeField()    
-    location = models.CharField(max_length=100)
-    address = models.CharField(max_length=100)
     comments = models.CharField(max_length=250)
     partner = models.ManyToManyField(Partner)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
