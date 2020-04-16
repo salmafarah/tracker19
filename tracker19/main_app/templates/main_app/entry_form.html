@@ -2,11 +2,8 @@
 
 {% block content %}
 <main class="container">
-  {% if object %}
-  <h1>Edit <span class="teal-text">{{object.name}}</span></h1>
-  {% else %}
+
   <h1>Add Entry</h1>
-  {% endif %}
   <form action="" method="post">
     {% csrf_token %}
     <table>
