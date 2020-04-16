@@ -1,5 +1,5 @@
 from django import forms
-from .models import Entry, Partner
+from .models import Entry, Partner, Location
 from django.forms import ModelForm
 
 class DateInput(forms.DateInput):
@@ -21,3 +21,9 @@ class PartnerForm(ModelForm):
     class Meta:
         model = Partner
         fields = ['name']
+
+
+class LocationForm(ModelForm):
+    class Meta:
+        model = Location
+        fields = ['name', 'address']

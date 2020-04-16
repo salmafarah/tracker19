@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required 
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.http import HttpResponse
-from .models import Entry, Partner
+from .models import Entry, Partner, Location
 from .forms import EntryForm
 
 
@@ -30,34 +30,15 @@ class EntryDelete(LoginRequiredMixin,DeleteView):
   model = Entry
   success_url = '/entry/'
 
-  
-  
-  
-
-
-
 
 # Create your views here.
 def home(request): #static for now -> maybe show all other user as stretch goal
     return render(request, 'home/home.html')
   
   
-  
-
-
-
-
-
-
 
 def about(request): #Static, read
   return render(request, 'about/about.html')
-
-
-
-
-
-
 
 
 
@@ -77,19 +58,11 @@ def signup(request):
 
 
 
-
-
-
-
 # @login_required 
 # def date_entry(request):
 #   context = {}
 #   context['form'] = DateForm()
 #   return render(request, 'main_app/date_entry.html', context)
-
-
-
-
 
 
 
@@ -146,3 +119,35 @@ def add_partner(request, entry_id):
         new_partner.save()
     return redirect('detail', entry_id = entry_id)
 '''
+
+
+@login_required
+def picked_location(request, entry_id, location_id):
+  Entry.objects.get(id=entry_id).location.add(location_id)
+  return redirect('detail', entry_id=entry_id)
+
+@login_required
+def unpicked_location(request, entry_id, location_id):
+  Entry.objects.get(id=entry_id).location.remove(location_id)
+  return redirect('detail', entry_id=entry_id)
+
+
+
+
+class LocationList(ListView):
+  model = Location
+
+class LocationDetail(DetailView):
+  model = Location
+
+class LocationCreate(CreateView):
+  model = Location
+  fields = '__all__'
+
+class LocationUpdate(UpdateView):
+  model = Location
+  fields = ['name', 'address', 'latitude', 'longitude']
+
+class LocationDelete(DeleteView):
+  model = Location
+  success_url = '/location/'
