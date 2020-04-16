@@ -113,14 +113,7 @@ def unassoc_partner(request, entry_id, partner_id):
   Entry.objects.get(id=entry_id).partner.remove(partner_id)
   return redirect('detail', entry_id=entry_id)
 
-@login_required
-def add_partner(request, entry_id):
-    form = PartnerForm(request.POST)
-    if form.is_valid():
-        new_partner = form.save(commit=False)
-        new_partner.entry_id = entry_id
-        new_partner.save()
-    return redirect('detail', entry_id = entry_id)
+
 
 @login_required 
 def entry_index(request):
@@ -138,3 +131,18 @@ def entry_index(request):
 
 
 
+
+
+
+
+
+'''
+@login_required
+def add_partner(request, entry_id):
+    form = PartnerForm(request.POST)
+    if form.is_valid():
+        new_partner = form.save(commit=False)
+        new_partner.entry_id = entry_id
+        new_partner.save()
+    return redirect('detail', entry_id = entry_id)
+'''
