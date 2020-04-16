@@ -42,6 +42,7 @@ class Entry (models.Model) :
     time = models.TimeField()    
     comments = models.CharField(max_length=250)
     partner = models.ManyToManyField(Partner)
+    location = models.ManyToManyField(Location)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
 
