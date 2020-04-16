@@ -29,7 +29,23 @@ class EntryUpdate(LoginRequiredMixin,UpdateView):
 class EntryDelete(LoginRequiredMixin,DeleteView):
   model = Entry
   success_url = '/entry/'
+class LocationList(ListView):
+  model = Location
 
+class LocationDetail(DetailView):
+  model = Location
+
+class LocationCreate(CreateView):
+  model = Location
+  fields = '__all__'
+
+class LocationUpdate(UpdateView):
+  model = Location
+  fields = ['name', 'address', 'latitude', 'longitude']
+
+class LocationDelete(DeleteView):
+  model = Location
+  success_url = '/location/'
 
 # Create your views here.
 def home(request): #static for now -> maybe show all other user as stretch goal
@@ -70,9 +86,11 @@ def signup(request):
 def entry_detail(request, entry_id):
   entry = Entry.objects.get(id=entry_id)
   no_partners = Partner.objects.exclude(id__in = entry.partner.all().values_list('id'))
+  # no_location = Location.objects.exclude(id__in = entry.location.all().values_list('id'))
   return render(request, 'entry/detail.html', {
     'entry': entry,
     'partner': no_partners
+    # 'location': no_location
   })
 
 
@@ -134,20 +152,3 @@ def unpicked_location(request, entry_id, location_id):
 
 
 
-class LocationList(ListView):
-  model = Location
-
-class LocationDetail(DetailView):
-  model = Location
-
-class LocationCreate(CreateView):
-  model = Location
-  fields = '__all__'
-
-class LocationUpdate(UpdateView):
-  model = Location
-  fields = ['name', 'address', 'latitude', 'longitude']
-
-class LocationDelete(DeleteView):
-  model = Location
-  success_url = '/location/'
