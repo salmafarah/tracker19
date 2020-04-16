@@ -12,6 +12,18 @@ from django import forms
 from datetime import datetime
 
 
+class Location (models.Model) : 
+    name = models.CharField(max_length=100)
+        #Shoppers, Metro... etc
+    address = models.CharField(max_length=250)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('location_detail', kwargs={'pk': self.id})
 
 class Partner(models.Model):
     name = models.CharField(max_length=30)
