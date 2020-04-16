@@ -6,8 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required 
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.http import HttpResponse
-from .models import Entry
-from .forms import EntryForm
+from .models import Entry, Health
+from .forms import EntryForm, HealthForm 
 
 
 #Classes go here
@@ -31,24 +31,42 @@ class EntryDelete(LoginRequiredMixin,DeleteView):
   model = Entry
   success_url = '/entry/'
 
+
+
+class HealthCreate(LoginRequiredMixin,CreateView):
+  model = Health
+  form_class = HealthForm 
+  success_url = '/health/'
+
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
+
+class HealthUpdate(LoginRequiredMixin,UpdateView):
+  model = Entry
+  fields = ['location', 'address', 'partner', 'comments' ]
+  success_url = '/health/'
+
+
+def health_index(request):
+  health = Health.objects.filter(user=request.user)
+  return render(request, 'health/index.html', { 'health': health })
   
-  
-  
+def anonymous(request): 
+    return render(request, 'anonymous/anonymous.html')
 
 
 
 
-# Create your views here.
+
+
+
+
 def home(request): #static for now -> maybe show all other user as stretch goal
     return render(request, 'home/home.html')
   
   
   
-
-
-
-
-
 
 
 def about(request): #Static, read
@@ -69,13 +87,12 @@ def signup(request):
     if form.is_valid(): 
       user = form.save()
       login(request,user)
-      return redirect('entry_index')
+      return redirect('health_create')
     else: 
-      error_message = 'Invalid sign up - try again SiS'
+      error_message = 'Invalid sign up - try again'
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
-
 
 
 

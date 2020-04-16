@@ -1,5 +1,5 @@
 from django import forms
-from .models import Entry
+from .models import Entry, Health 
 from django.forms import ModelForm
 
 class DateInput(forms.DateInput):
@@ -12,8 +12,17 @@ class TimeInput(forms.TimeInput):
 class EntryForm(ModelForm):
     class Meta:
         model = Entry
-        fields = [ 'date', 'time', 'location', 'address', 'partner', 'comments' ]
+        fields = [ 'date', 'time', 'location', 'address', 'partner', 'comments']
         widgets = {
             'date': DateInput(),
             'time': TimeInput()
+        }
+
+
+class HealthForm(ModelForm):
+    class Meta:
+        model = Health 
+        fields = ['date', 'health', 'feeling', 'symptoms', 'comments']
+        widgets = {
+            'date': DateInput(),
         }

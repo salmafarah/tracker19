@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="container">
+<h1>My Health</h1>
+
+<a href="{% url 'health_create' %}" >
+  <div class="card">
+      <div class="card-content">
+          <p>Add Health Status</p>
+      </div>
+  </div>
+</a>
+
+{% for health in health %}
+  <a href='#' >
+    <div class="card">
+        <div class="card-content">
+          <p>Date: {{ health.date}}</p>
+            <p>Health Status: {{ health.health}}</p>
+            <p>How are you feeling today?: {{ health.feeling}}</p>
+            <p>'What are your current symptoms ?': {{ health.symptoms}}</p>
+            <p>Comments: {{ health.comments}}</p>
+
+        </div>
+    </div>
+  </a>
+{% endfor %}
+</main>
+{% endblock %} 
