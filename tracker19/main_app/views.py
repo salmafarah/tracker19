@@ -6,13 +6,15 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required 
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.http import HttpResponse
-from .models import Entry
+from .models import Entry, Partner
+from .forms import EntryForm
+
 
 #Classes go here
 
 class FormCreate(LoginRequiredMixin,CreateView):
   model = Entry
-  fields = ['date', 'location', 'address', 'partner', 'comments' ]
+  form_class = EntryForm
   success_url = '/entry/'
 
   def form_valid(self, form):
@@ -21,8 +23,7 @@ class FormCreate(LoginRequiredMixin,CreateView):
 
 class EntryUpdate(LoginRequiredMixin,UpdateView):
   model = Entry
-
-  fields = ['location', 'address', 'partner', 'comments' ]
+  fields = ['comments' ]
   success_url = '/entry/'
 
 class EntryDelete(LoginRequiredMixin,DeleteView):
@@ -95,14 +96,22 @@ def signup(request):
 @login_required 
 def entry_detail(request, entry_id):
   entry = Entry.objects.get(id=entry_id)
+  no_partners = Partner.objects.exclude(id__in = entry.partner.all().values_list('id'))
   return render(request, 'entry/detail.html', {
-    'entry': entry
+    'entry': entry,
+    'partner': no_partners
   })
 
 
+@login_required
+def assoc_partner(request, entry_id, partner_id):
+  Entry.objects.get(id=entry_id).partner.add(partner_id)
+  return redirect('detail', entry_id=entry_id)
 
-
-
+@login_required
+def unassoc_partner(request, entry_id, partner_id):
+  Entry.objects.get(id=entry_id).partner.remove(partner_id)
+  return redirect('detail', entry_id=entry_id)
 
 
 
@@ -122,3 +131,18 @@ def entry_index(request):
 
 
 
+
+
+
+
+
+'''
+@login_required
+def add_partner(request, entry_id):
+    form = PartnerForm(request.POST)
+    if form.is_valid():
+        new_partner = form.save(commit=False)
+        new_partner.entry_id = entry_id
+        new_partner.save()
+    return redirect('detail', entry_id = entry_id)
+'''
