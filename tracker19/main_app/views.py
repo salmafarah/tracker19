@@ -12,6 +12,9 @@ from .forms import EntryForm, HealthForm
 
 
 #Classes go here
+​
+105
+ 
 
 class FormCreate(LoginRequiredMixin,CreateView):
   model = Entry
@@ -84,7 +87,6 @@ class LocationDelete(DeleteView):
 def home(request): #static for now -> maybe show all other user as stretch goal
     return render(request, 'home/home.html')
 
-
 def about(request): #Static, read
   return render(request, 'about/about.html')
 
@@ -104,14 +106,19 @@ def signup(request):
 
 
 @login_required 
+def entry_index(request):
+  entry = Entry.objects.filter(user=request.user)
+  return render(request, 'entry/index.html', { 'entry': entry })
+
+@login_required 
 def entry_detail(request, entry_id):
   entry = Entry.objects.get(id=entry_id)
   no_partners = Partner.objects.exclude(id__in = entry.partner.all().values_list('id'))
-  # no_location = Location.objects.exclude(id__in = entry.location.all().values_list('id'))
+  no_location = Location.objects.exclude(id__in = entry.location.all().values_list('id'))
   return render(request, 'entry/detail.html', {
     'entry': entry,
-    'partner': no_partners
-    # 'location': no_location
+    'partner': no_partners,
+    'locations': no_location
   })
 
 
@@ -125,12 +132,19 @@ def unassoc_partner(request, entry_id, partner_id):
   Entry.objects.get(id=entry_id).partner.remove(partner_id)
   return redirect('detail', entry_id=entry_id)
 
+def picked_location(request, entry_id, location_id):
+  Entry.objects.get(id=entry_id).location.add(location_id)
+  return redirect('detail', entry_id=entry_id)​
+105
+ 
 
 
-@login_required 
-def entry_index(request):
-  entry = Entry.objects.filter(user=request.user)
-  return render(request, 'entry/index.html', { 'entry': entry })
+
+def unpicked_location(request, entry_id, location_id):
+  Entry.objects.get(id=entry_id).location.remove(location_id)
+  return redirect('detail', entry_id=entry_id)
+
+
 
 
 '''
@@ -145,15 +159,6 @@ def add_partner(request, entry_id):
 '''
 
 
-@login_required
-def picked_location(request, entry_id, location_id):
-  Entry.objects.get(id=entry_id).location.add(location_id)
-  return redirect('detail', entry_id=entry_id)
-
-@login_required
-def unpicked_location(request, entry_id, location_id):
-  Entry.objects.get(id=entry_id).location.remove(location_id)
-  return redirect('detail', entry_id=entry_id)
 
 
 
