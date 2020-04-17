@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <main class="container">
+
   <h1>Entry Details</h1>
   <div class="row">
     <div class="card">
       <div class="card-content">
-        <p>Date: {{ entry.date }}</p>
+        <span class="card-title">{{ entry.date }}</span>
+
         <p>Time: {{ entry.time }}</p>
         <p>Comments: {{ entry.comments }}</p>
       </div>
@@ -17,15 +20,17 @@
 
 
     <hr>
+
     <div class="row">
       <div class="col s6">
-        <h3>Location Picked</h3>
-        {% if location.count %}
-        {% for location in location.all %}
+        <h3>Locations</h3>
+        {% if entry.location.count %}
+        {% for location in entry.location.all %}
             <div class="card">
               <div class="card-content">
                 <span class="card-title">
-                  {{ location.name }} <span style="color: {{ location.address }}">{{ location.address }}</span> 
+                  {{ location.name }}
+                  <p> {{ location.address }}</p>
                 </span>
               </div>
               <div class="card-action">
@@ -45,13 +50,14 @@
       <!-- Available locations will come after this line -->
     
       <div class="col s6">
-        <h3>Location Options</h3>
-        {% if location.count%}
-          {% for location in location.all %}
+        <h3>Available Locations</h3>
+        {% if locations.count %}
+        {% for location in locations.all %}
             <div class="card">
               <div class="card-content">
                 <span class="card-title">
-                  {{ location.name }} <span style="color: {{ location.address }}">{{ location.address }}</span> 
+                  {{ location.name }}
+                  <p> {{ location.address }}</p>
                 </span>
               </div>
               <div class="card-action">
