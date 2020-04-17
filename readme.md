@@ -19,7 +19,7 @@ The user is able to link to the latest news, symptoms, statistics.
 The map component, which allows users to find essentials open in local Toronto downtown.
 The about page at the top is a brief navigation area explaining the the app, the team and potential emergency/healthcare contacts
 The user must Sign-in at the nav bar too access user daily entried, health status.
-<img src="home.png"  width="900">
+![](https://github.com/salmafarah/tracker19/blob/master/imagesRead/home.png)
 
 LOGIN PAGE:
 Simple format for users of all ages to  sign in with minimal issues
