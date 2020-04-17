@@ -1,0 +1,79 @@
+<img src="https://imgur.com/7pxrnQr.jpg"  width="900">
+
+# Hello, and Welcome to Tracker-19
+
+# Why? What? Who?
+Why?
+We built this app to support our locals stay safe and practice social distanicing. In the future we hope to work with healthcare professsionals and connect our users with the latest information on specific areas. Our goal is to keep eveyrone as safe possible and reduce outbreak numbers.
+
+What?
+The user is able to track their daily location using our app while maintening anonmity. The records are meant to help the user remember where they went at specific times.
+
+Who?
+We are a team of new developers focused on creating a web app for local Torontonians to get around the city during the panedemic. 
+
+# Let's, Navigate through the App
+
+HOME PAGE: 
+The user is able to link to the latest news, symptoms, statistics.
+The map component, which allows users to find essentials open in local Toronto downtown.
+The about page at the top is a brief navigation area explaining the the app, the team and potential emergency/healthcare contacts
+The user must Sign-in at the nav bar too access user daily entried, health status.
+<img src="home.png"  width="900">
+
+LOGIN PAGE:
+Simple format for users of all ages to  sign in with minimal issues
+<img src="  width="900">
+
+ADD ENTRY PAGE:
+The add entry page allows users to add a date, time and comments on each entry
+<img src="https://imgur.com/7pxrnQr.jpg"  width="900">
+
+ADD ENTRY PAGE:
+The add entry page allows users to add a date, time and comments on each entry
+<img src="https://imgur.com/7pxrnQr.jpg"  width="900">
+
+REGISTRATION:
+The registration page just allows user to create a name and password.
+<img src="https://imgur.com/7pxrnQr.jpg"  width="900">
+
+ENTRIES:
+Shows all entries added by user.
+<img src="https://imgur.com/7pxrnQr.jpg"  width="900">
+
+
+HEALTH STATUS:
+Once the user registers they are taken to a health status page to keep track of of initial health conditions.
+<img src="https://imgur.com/7pxrnQr.jpg"  width="900">
+
+ENTRIES DETAILS:
+The user is able to read the details of each entry.
+<img src="https://imgur.com/7pxrnQr.jpg"  width="900">
+
+DELETE ENTRY:
+Page to confirm if user should delete the entry.
+<img src="https://imgur.com/7pxrnQr.jpg"  width="900">
+
+ABOUT:
+Brief explanation on the app the purpose of the app. 
+<img src="https://imgur.com/7pxrnQr.jpg"  width="900">
+
+PRIVACY POLICY:
+User must agree to accept privacy policy upon registration.
+<img src="https://imgur.com/7pxrnQr.jpg"  width="900">
+
+
+ABOUT:
+Brief explanation on the app the purpose of the app. 
+<img src="https://imgur.com/7pxrnQr.jpg"  width="900">
+
+MY HEALTH:
+Status page on all entries focused on user health.
+<img src="https://imgur.com/7pxrnQr.jpg"  width="900">
+
+# Stretch Goals
+We have two major goals for now:
+
+1. Notify our users when someone verified with Corona has been gone to the same place the user has been too
+2. Component within app the updates the number of people at each of the included essential locations on real time
+3. Work with Public Health on data collection while mainitaining privacy of individual users
