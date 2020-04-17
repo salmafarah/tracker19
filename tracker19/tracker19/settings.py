@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'emoticons'
 ]
 
 MIDDLEWARE = [
@@ -79,7 +78,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'tracker19db',
-        # 'OPTIONS': { 'charset': 'utf8mb4'},
     }
 
 }

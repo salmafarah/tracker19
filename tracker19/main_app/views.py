@@ -43,15 +43,24 @@ class HealthCreate(LoginRequiredMixin,CreateView):
     return super().form_valid(form)
 
 class HealthUpdate(LoginRequiredMixin,UpdateView):
-  model = Entry
-  fields = ['location', 'address', 'partner', 'comments' ]
+  model = Health
+  fields = ['date', 'health', 'feeling', 'symptoms', 'comments' ]
   success_url = '/health/'
 
-
+@login_required 
 def health_index(request):
   health = Health.objects.filter(user=request.user)
   return render(request, 'health/index.html', { 'health': health })
+
+
+@login_required 
+def health_detail(request, health_id):
+  health = Health.objects.get(id=health_id)
+  return render(request, 'health/detail.html', {
+    'health': health
+  })
   
+
 def anonymous(request): 
     return render(request, 'anonymous/anonymous.html')
 
@@ -87,7 +96,7 @@ def signup(request):
     if form.is_valid(): 
       user = form.save()
       login(request,user)
-      return redirect('health_create')
+      return redirect('anonymous')
     else: 
       error_message = 'Invalid sign up - try again'
   form = UserCreationForm()

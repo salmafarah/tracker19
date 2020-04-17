@@ -14,7 +14,7 @@ from django.utils.safestring import mark_safe
 
 HealthStatus= (
     ('choice1', 'I’ve been dignoised with COVID-19 and would like to create a record of my whereabouts'), 
-    ('choice2','I’ve recoved from COVID-19, but would like to track my whereabouts'), 
+    ('choice2','I’ve recovered from COVID-19, but would like to track my whereabouts'), 
     ('choice3','I’ve not been tested for COVID-19, but feel sick and want to track my whereabouts'), 
     ('choice4','I do not have COVID-19 but would like to track my whereabout') 
 )
@@ -49,6 +49,9 @@ class Health(models.Model):
 
     def __str__(self):
         return f"{self.get_feeling_display()}"
+    
+    def get_absolute_url(self):
+        return reverse('health_detail', kwargs={'health_id': self.id})
 
 
 #     year = models.IntegerField()

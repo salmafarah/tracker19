@@ -3,7 +3,7 @@
 <main class="container">
 <h1>My Health</h1>
 
-<a href="{% url 'health_create' %}" >
+<a href="{% url 'health_create'%}">
   <div class="card">
       <div class="card-content">
           <p>Add Health Status</p>
@@ -12,13 +12,13 @@
 </a>
 
 {% for health in health %}
-  <a href='#' >
+  <a href="{% url 'health_detail' health.id %}" >
     <div class="card">
         <div class="card-content">
           <p>Date: {{ health.date}}</p>
-            <p>Health Status: {{ health.health}}</p>
-            <p>How are you feeling today?: {{ health.feeling}}</p>
-            <p>'What are your current symptoms ?': {{ health.symptoms}}</p>
+            <p>Health Status: {{ health.get_health_display}}</p>
+            <p>How are you feeling today?: {{ health.get_feeling_display}}</p>
+            <p>What are your current symptoms?: {{ health.symptoms}}</p>
             <p>Comments: {{ health.comments}}</p>
 
         </div>

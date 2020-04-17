@@ -33,12 +33,8 @@
       <li><a href="{% url 'health_index' %}" class="black-text">My Health</a></li>
     </ul>
       <ul class="right">
-        <li><a href="{% url 'form_create' %}" class="black-text">Create an Entry </a></li>
-      </ul>
-      <ul class="right">
         <li><a href="{% url 'entry_index' %}" class="black-text">My Entries </a></li>
       </ul>
-
       {% else%}
         <ul class="right">
           <li><a href="{% url 'signup' %}" class="black-text">Sign Up</a></li>
