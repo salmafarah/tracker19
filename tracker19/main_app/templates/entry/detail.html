@@ -51,8 +51,8 @@
     
       <div class="col s6">
         <h3>Available Locations</h3>
-        {% if entry.location.count %}
-        {% for location in entry.location.all %}
+        {% if locations.count %}
+        {% for location in locations.all %}
             <div class="card">
               <div class="card-content">
                 <span class="card-title">

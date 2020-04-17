@@ -84,7 +84,7 @@ def entry_detail(request, entry_id):
   return render(request, 'entry/detail.html', {
     'entry': entry,
     'partner': no_partners,
-    'location': no_location
+    'locations': no_location
   })
 
 
