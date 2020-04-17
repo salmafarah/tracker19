@@ -41,6 +41,7 @@ Shows all entries added by user.
 HEALTH STATUS:
 Once the user registers they are taken to a health status page to keep track of of initial health conditions.
 ![](https://github.com/salmafarah/tracker19/blob/master/imagesRead/healthStat1.jpg)
+![](https://github.com/salmafarah/tracker19/blob/master/imagesRead/healthStat2.jpg)
 
 
 ENTRIES DETAILS:
@@ -59,10 +60,6 @@ PRIVACY POLICY:
 User must agree to accept privacy policy upon registration.
 ![](https://github.com/salmafarah/tracker19/blob/master/imagesRead/privacy.jpg)
 
-
-ABOUT:
-Brief explanation on the app the purpose of the app. 
-![](https://github.com/salmafarah/tracker19/blob/master/imagesRead/about.png)
 
 MY HEALTH:
 Status page on all entries focused on user health.
