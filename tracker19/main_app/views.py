@@ -6,8 +6,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required 
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.http import HttpResponse
-from .models import Entry, Health
+from .models import Entry, Partner, Location,Health
 from .forms import EntryForm, HealthForm 
+
 
 
 #Classes go here
@@ -15,7 +16,6 @@ from .forms import EntryForm, HealthForm
 class FormCreate(LoginRequiredMixin,CreateView):
   model = Entry
   form_class = EntryForm
-  # fields = [ 'date', 'location', 'address', 'partner', 'comments' ]
   success_url = '/entry/'
 
   def form_valid(self, form):
@@ -24,14 +24,22 @@ class FormCreate(LoginRequiredMixin,CreateView):
 
 class EntryUpdate(LoginRequiredMixin,UpdateView):
   model = Entry
-  fields = ['location', 'address', 'partner', 'comments' ]
+  fields = ['comments' ]
   success_url = '/entry/'
 
 class EntryDelete(LoginRequiredMixin,DeleteView):
   model = Entry
   success_url = '/entry/'
+class LocationList(ListView):
+  model = Location
+
+class LocationDetail(DetailView):
+  model = Location
 
 
+class LocationCreate(CreateView):
+  model = Location
+  fields = '__all__'
 
 class HealthCreate(LoginRequiredMixin,CreateView):
   model = Health
@@ -60,34 +68,25 @@ def health_detail(request, health_id):
     'health': health
   })
   
-
 def anonymous(request): 
     return render(request, 'anonymous/anonymous.html')
 
 
+class LocationUpdate(UpdateView):
+  model = Location
+  fields = ['name', 'address', 'latitude', 'longitude']
 
+class LocationDelete(DeleteView):
+  model = Location
+  success_url = '/location/'
 
-
-
-
-
+# Create your views here.
 def home(request): #static for now -> maybe show all other user as stretch goal
     return render(request, 'home/home.html')
-  
-  
-  
 
 
 def about(request): #Static, read
   return render(request, 'about/about.html')
-
-
-
-
-
-
-
-
 
 def signup(request):
   error_message = ''
@@ -104,33 +103,27 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 
-
-
-
-
-# @login_required 
-# def date_entry(request):
-#   context = {}
-#   context['form'] = DateForm()
-#   return render(request, 'main_app/date_entry.html', context)
-
-
-
-
-
-
-
 @login_required 
 def entry_detail(request, entry_id):
   entry = Entry.objects.get(id=entry_id)
+  no_partners = Partner.objects.exclude(id__in = entry.partner.all().values_list('id'))
+  # no_location = Location.objects.exclude(id__in = entry.location.all().values_list('id'))
   return render(request, 'entry/detail.html', {
-    'entry': entry
+    'entry': entry,
+    'partner': no_partners
+    # 'location': no_location
   })
 
 
+@login_required
+def assoc_partner(request, entry_id, partner_id):
+  Entry.objects.get(id=entry_id).partner.add(partner_id)
+  return redirect('detail', entry_id=entry_id)
 
-
-
+@login_required
+def unassoc_partner(request, entry_id, partner_id):
+  Entry.objects.get(id=entry_id).partner.remove(partner_id)
+  return redirect('detail', entry_id=entry_id)
 
 
 
@@ -140,13 +133,28 @@ def entry_index(request):
   return render(request, 'entry/index.html', { 'entry': entry })
 
 
+'''
+@login_required
+def add_partner(request, entry_id):
+    form = PartnerForm(request.POST)
+    if form.is_valid():
+        new_partner = form.save(commit=False)
+        new_partner.entry_id = entry_id
+        new_partner.save()
+    return redirect('detail', entry_id = entry_id)
+'''
 
 
+@login_required
+def picked_location(request, entry_id, location_id):
+  Entry.objects.get(id=entry_id).location.add(location_id)
+  return redirect('detail', entry_id=entry_id)
 
-# Home page -> Nav Bar: Home, About, Sign-in, Sign-up
-# User page -> Nav Bar: Home, About, Sign-out, Profile
-# Templates
-# Home
+@login_required
+def unpicked_location(request, entry_id, location_id):
+  Entry.objects.get(id=entry_id).location.remove(location_id)
+  return redirect('detail', entry_id=entry_id)
+
 
 
 
