@@ -24,7 +24,7 @@ class Location (models.Model) :
 
     def get_absolute_url(self):
         return reverse('location_detail', kwargs={'pk': self.id})
-
+        
 class Partner(models.Model):
     name = models.CharField(max_length=30)
     
@@ -47,9 +47,7 @@ class Entry (models.Model) :
     
 
     def __str__(self):
-        return self.location
-
-
+        return self.comments
 
 
 
