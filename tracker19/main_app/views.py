@@ -6,11 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required 
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.http import HttpResponse
-from .models import Entry, Partner, Location
-from .forms import EntryForm
-
-
-#Classes go here
+from .models import Entry, Partner, Location,Health
+from .forms import EntryForm, HealthForm 
 
 class FormCreate(LoginRequiredMixin,CreateView):
   model = Entry
@@ -35,9 +32,41 @@ class LocationList(ListView):
 class LocationDetail(DetailView):
   model = Location
 
+
 class LocationCreate(CreateView):
   model = Location
   fields = '__all__'
+
+class HealthCreate(LoginRequiredMixin,CreateView):
+  model = Health
+  form_class = HealthForm 
+  success_url = '/health/'
+
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
+
+class HealthUpdate(LoginRequiredMixin,UpdateView):
+  model = Health
+  fields = ['date', 'health', 'feeling', 'symptoms', 'comments' ]
+  success_url = '/health/'
+
+@login_required 
+def health_index(request):
+  health = Health.objects.filter(user=request.user)
+  return render(request, 'health/index.html', { 'health': health })
+
+
+@login_required 
+def health_detail(request, health_id):
+  health = Health.objects.get(id=health_id)
+  return render(request, 'health/detail.html', {
+    'health': health
+  })
+  
+def anonymous(request): 
+    return render(request, 'anonymous/anonymous.html')
+
 
 class LocationUpdate(UpdateView):
   model = Location
@@ -47,16 +76,12 @@ class LocationDelete(DeleteView):
   model = Location
   success_url = '/location/'
 
-# Create your views here.
-def home(request): #static for now -> maybe show all other user as stretch goal
+def home(request):
     return render(request, 'home/home.html')
-  
-  
 
-def about(request): #Static, read
+
+def about(request):
   return render(request, 'about/about.html')
-
-
 
 def signup(request):
   error_message = ''
@@ -65,21 +90,12 @@ def signup(request):
     if form.is_valid(): 
       user = form.save()
       login(request,user)
-      return redirect('entry_index')
+      return redirect('anonymous')
     else: 
-      error_message = 'Invalid sign up - try again SiS'
+      error_message = 'Invalid sign up - try again'
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
-
-
-
-# @login_required 
-# def date_entry(request):
-#   context = {}
-#   context['form'] = DateForm()
-#   return render(request, 'main_app/date_entry.html', context)
-
 
 
 @login_required 
@@ -110,21 +126,6 @@ def unassoc_partner(request, entry_id, partner_id):
 def entry_index(request):
   entry = Entry.objects.filter(user=request.user)
   return render(request, 'entry/index.html', { 'entry': entry })
-
-
-
-
-
-# Home page -> Nav Bar: Home, About, Sign-in, Sign-up
-# User page -> Nav Bar: Home, About, Sign-out, Profile
-# Templates
-# Home
-
-
-
-
-
-
 
 
 '''

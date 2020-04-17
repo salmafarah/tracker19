@@ -79,6 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'tracker19db',
     }
+
 }
 
 
