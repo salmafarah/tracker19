@@ -9,13 +9,6 @@ from django.http import HttpResponse
 from .models import Entry, Partner, Location,Health
 from .forms import EntryForm, HealthForm 
 
-
-
-#Classes go here
-​
-105
- 
-
 class FormCreate(LoginRequiredMixin,CreateView):
   model = Entry
   form_class = EntryForm
@@ -84,7 +77,7 @@ class LocationDelete(DeleteView):
   success_url = '/location/'
 
 # Create your views here.
-def home(request): #static for now -> maybe show all other user as stretch goal
+def home(request): 
     return render(request, 'home/home.html')
 
 def about(request): #Static, read
@@ -134,11 +127,7 @@ def unassoc_partner(request, entry_id, partner_id):
 
 def picked_location(request, entry_id, location_id):
   Entry.objects.get(id=entry_id).location.add(location_id)
-  return redirect('detail', entry_id=entry_id)​
-105
- 
-
-
+  return redirect('detail', entry_id=entry_id)
 
 def unpicked_location(request, entry_id, location_id):
   Entry.objects.get(id=entry_id).location.remove(location_id)
