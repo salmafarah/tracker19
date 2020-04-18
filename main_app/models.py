@@ -1,8 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User 
 from django.urls import reverse
-from django import forms 
+
 from datetime import datetime
+from django.contrib.auth.models import User
+from django import forms
 from django.utils.safestring import mark_safe
 
 HealthStatus= (
@@ -19,18 +20,24 @@ Feeling = (
     ('choice1', mark_safe('&#128567;')),
 )
 
+
 class Location (models.Model) : 
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=250)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('location_detail', kwargs={'pk': self.id})
+<<<<<<< HEAD:tracker19/main_app/models.py
         
+=======
+    
+    class Meta:
+        ordering = ['-name']
+
+>>>>>>> 95996f9acb2d9de4882b13240ae161e3ac18d789:main_app/models.py
 class Partner(models.Model):
     name = models.CharField(max_length=30)
     
@@ -68,3 +75,11 @@ class Health(models.Model):
     def get_absolute_url(self):
         return reverse('health_detail', kwargs={'health_id': self.id})
 
+<<<<<<< HEAD:tracker19/main_app/models.py
+=======
+
+
+
+
+
+>>>>>>> 95996f9acb2d9de4882b13240ae161e3ac18d789:main_app/models.py

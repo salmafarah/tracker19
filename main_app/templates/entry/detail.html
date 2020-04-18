@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <main class="container">
+
   <h1>Entry Details</h1>
   <div class="row">
     <div class="card">
       <div class="card-content">
-        <p>Date: {{ entry.date }}</p>
+        <span class="card-title">{{ entry.date }}</span>
+
         <p>Time: {{ entry.time }}</p>
         <p>Comments: {{ entry.comments }}</p>
       </div>
@@ -17,8 +20,10 @@
 
 
     <hr>
+
     <div class="row">
       <div class="col s6">
+<<<<<<< HEAD:tracker19/main_app/templates/entry/detail.html
         <h3>Location Picked</h3>
         {% if location.count %}
         {% for location in location.all %}
@@ -36,12 +41,33 @@
           </div>
         </div>
         {% endfor %}
+=======
+        <h3>Locations</h3>
+        {% if entry.location.count %}
+        {% for location in entry.location.all %}
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">
+                  {{ location.name }}
+                  <p> {{ location.address }}</p>
+                </span>
+              </div>
+              <div class="card-action">
+                <form action="{% url 'unpicked_location' entry.id location.id %}" method="post">
+                    {% csrf_token %}
+                  <button type="submit" class="btn">Remove</button>
+                </form>
+              </div>
+            </div>
+          {% endfor %}
+>>>>>>> 95996f9acb2d9de4882b13240ae161e3ac18d789:main_app/templates/entry/detail.html
         {% else %}
         <h5>Pick a location</h5>
         {% endif %}
       </div>
 
       <div class="col s6">
+<<<<<<< HEAD:tracker19/main_app/templates/entry/detail.html
         <h3>Location Options</h3>
         {% if location.count%}
         {% for location in location.all %}
@@ -59,6 +85,26 @@
           </div>
         </div>
         {% endfor %}
+=======
+        <h3>Available Locations</h3>
+        {% if locations.count %}
+        {% for location in locations.all %}
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">
+                  {{ location.name }}
+                  <p> {{ location.address }}</p>
+                </span>
+              </div>
+              <div class="card-action">
+                <form action="{% url 'picked_location' entry.id location.id %}" method="post">
+                    {% csrf_token %}
+                  <button type="submit" class="btn">Add</button>
+                </form>
+              </div>
+            </div>
+          {% endfor %}
+>>>>>>> 95996f9acb2d9de4882b13240ae161e3ac18d789:main_app/templates/entry/detail.html
         {% endif %}
       </div>
     </div>

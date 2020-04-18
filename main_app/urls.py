@@ -18,7 +18,8 @@ urlpatterns = [
   path('entry/<int:pk>/update/', views.EntryUpdate.as_view(), name='entry_update'),
   path('entry/<int:pk>/delete/', views.EntryDelete.as_view(), name='entry_delete'),
   path('entry/<int:entry_id>/picked_location/<int:location_id>/', views.picked_location, name='picked_location'),
-  path('entry/<int:entry_id>/location_unpicked/<int:location_id>/', views.unpicked_location, name='location_unpicked'),
+  # Unpick a location 
+  path('entry/<int:entry_id>/location_unpicked/<int:location_id>/', views.unpicked_location, name='unpicked_location'),
   path('location/', views.LocationList.as_view(), name='location_index'),
   path('location/<int:pk>/', views.LocationDetail.as_view(), name='location_detail'),
   path('location/create/', views.LocationCreate.as_view(), name='location_create'),

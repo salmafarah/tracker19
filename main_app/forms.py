@@ -35,4 +35,3 @@ class LocationForm(ModelForm):
     class Meta:
         model = Location
         fields = ['name', 'address']
-
