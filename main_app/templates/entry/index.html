@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="container">
+<h1>Entries</h1>
+
+<a href="{% url 'form_create'%}">
+  <div class="card">
+      <div class="card-content">
+          <p>Add an Entry</p>
+      </div>
+  </div>
+</a>
+
+
+{% for entry in entry %}
+  <a href="{% url 'detail' entry.id %}" >
+    <div class="card">
+        <div class="card-content">
+            <p>Date: {{ entry.date }}</p>
+            <p>Time: {{ entry.time }}</p>
+            <p>Comments: {{ entry.comments }}</p>  
+        </div>
+    </div>
+  </a>
+{% endfor %}
+</main>
+{% endblock %}
