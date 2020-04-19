@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.http import HttpResponse
 from .models import Entry, Partner, Location,Health
-from .forms import EntryForm, HealthForm 
+from .forms import EntryForm, HealthForm, PartnerForm
 
 
 
@@ -110,11 +110,11 @@ def entry_index(request):
 @login_required 
 def entry_detail(request, entry_id):
   entry = Entry.objects.get(id=entry_id)
-  no_partners = Partner.objects.exclude(id__in = entry.partner.all().values_list('id'))
+  partner_form = PartnerForm()
   no_location = Location.objects.exclude(id__in = entry.location.all().values_list('id'))
   return render(request, 'entry/detail.html', {
     'entry': entry,
-    'partner': no_partners,
+    'partner_form': partner_form,
     'locations': no_location
   })
 
@@ -138,18 +138,14 @@ def unpicked_location(request, entry_id, location_id):
   return redirect('detail', entry_id=entry_id)
 
 
-
-
-'''
 @login_required
 def add_partner(request, entry_id):
-    form = PartnerForm(request.POST)
-    if form.is_valid():
-        new_partner = form.save(commit=False)
-        new_partner.entry_id = entry_id
-        new_partner.save()
+  partner_form = PartnerForm(request.POST)
+  if partner_form.is_valid():
+    new_partner = partner_form.save(commit=False)
+    new_partner.entry_id = entry_id
+    new_partner.save()
     return redirect('detail', entry_id = entry_id)
-'''
 
 
 
