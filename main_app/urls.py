@@ -17,7 +17,7 @@ urlpatterns = [
   path('entry/<int:entry_id>/unassoc_partner/<int:partner_id>/', views.unassoc_partner, name='unassoc_partner'),
   path('entry/<int:pk>/update/', views.EntryUpdate.as_view(), name='entry_update'),
   path('entry/<int:pk>/delete/', views.EntryDelete.as_view(), name='entry_delete'),
-
+  path('entry/<int:entry_id>/add_partner/', views.add_partner, name='add_partner'),
   # Pick a Location with an Entry(M:M)
   path('entry/<int:entry_id>/picked_location/<int:location_id>/', views.picked_location, name='picked_location'),
   # Unpick a location 
