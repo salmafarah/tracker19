@@ -29,7 +29,7 @@ class HealthForm(ModelForm):
 class PartnerForm(ModelForm):
     class Meta:
         model = Partner
-        fields = ['name', 'description']
+        fields = ['name']
 
 
 class LocationForm(ModelForm):

@@ -36,20 +36,9 @@ class Location (models.Model) :
     class Meta:
         ordering = ['-name']
 
-class Entry (models.Model) : 
-    date = models.DateField()
-    time = models.TimeField()    
-    comments = models.CharField(max_length=250)
-    location = models.ManyToManyField(Location)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return self.location
-
 class Partner(models.Model):
     name = models.CharField(max_length=30)
-    description = models.CharField(max_length=100)
-    entry = models.ForeignKey(Entry, on_delete=models.CASCADE)
+    
     def __str__(self):
         return self.name
     
@@ -58,6 +47,19 @@ class Partner(models.Model):
 
     class Meta:
         ordering = ['-name']
+
+class Entry (models.Model) : 
+    date = models.DateField()
+    time = models.TimeField()    
+    comments = models.CharField(max_length=250)
+    partner = models.ManyToManyField(Partner)
+    location = models.ManyToManyField(Location)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+
+  
+    def __str__(self):
+        return self.location
 
 class Health(models.Model):
     date = models.DateField()

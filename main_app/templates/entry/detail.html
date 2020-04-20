@@ -26,15 +26,67 @@
         <h3>Locations</h3>
         {% if entry.location.count %}
         {% for location in entry.location.all %}
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">
+                  {{ location.name }}
+                  <p> {{ location.address }}</p>
+                </span>
+              </div>
+              <div class="card-action">
+                <form action="{% url 'unpicked_location' entry.id location.id %}" method="post">
+                    {% csrf_token %}
+                  <button type="submit" class="btn">Remove</button>
+                </form>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <h5>Pick a location</h5>
+        {% endif %}
+      </div>  
+    
+    
+      <!-- Available locations will come after this line -->
+    
+      <div class="col s6">
+        <h3>Available Locations</h3>
+        {% if locations.count %}
+        {% for location in locations.all %}
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">
+                  {{ location.name }}
+                  <p> {{ location.address }}</p>
+                </span>
+              </div>
+              <div class="card-action">
+                <form action="{% url 'picked_location' entry.id location.id %}" method="post">
+                    {% csrf_token %}
+                  <button type="submit" class="btn">Add</button>
+                </form>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div> 
+
+
+    <hr>
+    <div class="row">
+      <div class="col s6">
+        <h3>Who Did You Go With?</h3>
+        {% if entry.partner.count %}
+        {% for partner in entry.partner.all %}
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              {{ location.name }}
-              <p> {{ location.address }}</p>
+              {{ partner.name }}
             </span>
           </div>
           <div class="card-action">
-            <form action="{% url 'unpicked_location' entry.id location.id %}" method="post">
+            <form action="{% url 'unassoc_partner' entry.id partner.id %}" method="delete">
               {% csrf_token %}
               <button type="submit" class="btn">Remove</button>
             </form>
@@ -42,63 +94,32 @@
         </div>
         {% endfor %}
         {% else %}
-        <h5>Pick a location</h5>
+        <h5>Travelled Alone. </h5>
         {% endif %}
       </div>
-
-
-      <!-- Available locations will come after this line -->
-
       <div class="col s6">
-        <h3>Available Locations</h3>
-        {% if locations.count %}
-        {% for location in locations.all %}
+        <h3>Partners: </h3>
+        {% if partner.count %}
+        {% for partner in partner.all %}
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              {{ location.name }}
-              <p> {{ location.address }}</p>
+              {{ partner.name }}
             </span>
           </div>
           <div class="card-action">
-            <form action="{% url 'picked_location' entry.id location.id %}" method="post">
+            <form action="{% url 'assoc_partner' entry.id partner.id %}" method="post">
               {% csrf_token %}
               <button type="submit" class="btn">Add</button>
             </form>
           </div>
         </div>
         {% endfor %}
+        {% else %}
+        <h5>You May Be Travelling With Too Many People</h5>
         {% endif %}
       </div>
     </div>
-
-    <hr>
-    
-    <div class="col s6">
-      <h3>Add a Travel Partner</h3>
-      <form action="{% url 'add_partner' entry.id %}" method="post">
-        {% csrf_token %}
-        {{ partner_form.as_p }}
-        <input type="submit" class="btn" value="Add Travel Partner">
-      </form>
-      <table id="striped">
-        <thead>
-          <tr>
-            <th>Travel Partner</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for partner in entry.partner_set.all %}
-          <tr>
-            <td>{{ partner.name }}</td>
-            <td>{{ partner.description }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-
   </div>
 </main>
 {% endblock %}
