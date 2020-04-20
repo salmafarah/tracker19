@@ -11,7 +11,7 @@ from .forms import EntryForm, HealthForm
 
 
 
-#Classes go here 
+#Classes go here
 
 class FormCreate(LoginRequiredMixin,CreateView):
   model = Entry
@@ -81,7 +81,7 @@ class LocationDelete(DeleteView):
   success_url = '/location/'
 
 # Create your views here.
-def home(request): #static for now -> maybe show all other user as stretch goal
+def home(request): 
     return render(request, 'home/home.html')
 
 def about(request): #Static, read
@@ -132,10 +132,18 @@ def unassoc_partner(request, entry_id, partner_id):
 def picked_location(request, entry_id, location_id):
   Entry.objects.get(id=entry_id).location.add(location_id)
   return redirect('detail', entry_id=entry_id)
-  
+
+
+
+@login_required 
+def entry_index(request):
+  entry = Entry.objects.filter(user=request.user)
+  return render(request, 'entry/index.html', { 'entry': entry })
+
 def unpicked_location(request, entry_id, location_id):
   Entry.objects.get(id=entry_id).location.remove(location_id)
   return redirect('detail', entry_id=entry_id)
+
 
 
 
@@ -150,6 +158,7 @@ def add_partner(request, entry_id):
         new_partner.save()
     return redirect('detail', entry_id = entry_id)
 '''
+
 
 
 
