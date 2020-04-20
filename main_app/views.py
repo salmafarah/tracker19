@@ -118,21 +118,9 @@ def entry_detail(request, entry_id):
     'locations': no_location
   })
 
-@login_required
-def assoc_partner(request, entry_id, partner_id):
-  Entry.objects.get(id=entry_id).partner.add(partner_id)
-  return redirect('detail', entry_id=entry_id)
-
-@login_required
-def unassoc_partner(request, entry_id, partner_id):
-  Entry.objects.get(id=entry_id).partner.remove(partner_id)
-  return redirect('detail', entry_id=entry_id)
-
 def picked_location(request, entry_id, location_id):
   Entry.objects.get(id=entry_id).location.add(location_id)
   return redirect('detail', entry_id=entry_id)
-
-
 
 @login_required 
 def entry_index(request):
@@ -150,4 +138,9 @@ def add_partner(request, entry_id):
     new_partner = partner_form.save(commit=False)
     new_partner.entry_id = entry_id
     new_partner.save()
+    return redirect('detail', entry_id = entry_id)
+
+@login_required
+def delete_partner(request, entry_id):
+    Partner.objects.filter(id=entry_id).delete()
     return redirect('detail', entry_id = entry_id)

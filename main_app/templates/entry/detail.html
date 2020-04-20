@@ -94,7 +94,7 @@
           <tr>
             <td>{{ partner.name }}</td>
             <td>{{ partner.description }}</td>
-            <td> X </td>
+            <td><a href="{% url 'delete_partner' entry.id %}">X</a></td>
           </tr>
           {% endfor %}
         </tbody>
